@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1080" viewBox="0 0 1900 1080">
+  <defs>
+    <style>
+      .title { font: 700 28px Arial, sans-serif; fill: #1f1f1f; }
+      .section { font: 700 20px Arial, sans-serif; fill: #1f1f1f; }
+      .label { font: 600 15px Arial, sans-serif; fill: #222; }
+      .small { font: 13px Arial, sans-serif; fill: #333; }
+      .tiny { font: 12px Arial, sans-serif; fill: #444; }
+      .panel { fill: #ffffff; stroke: #6d6d6d; stroke-width: 1.5; rx: 18; ry: 18; }
+      .teacher { fill: #eaf3ff; stroke: #3c78d8; stroke-width: 1.6; rx: 14; ry: 14; }
+      .student { fill: #e8f7ec; stroke: #2e8b57; stroke-width: 1.6; rx: 14; ry: 14; }
+      .input { fill: #fff4cc; stroke: #c79400; stroke-width: 1.6; rx: 12; ry: 12; }
+      .distill { fill: #fdebf3; stroke: #c95a8a; stroke-width: 1.6; rx: 14; ry: 14; }
+      .deploy { fill: #fff1e8; stroke: #d97904; stroke-width: 1.6; rx: 14; ry: 14; }
+      .note { fill: #f5f5f5; stroke: #909090; stroke-width: 1.2; stroke-dasharray: 7 5; rx: 12; ry: 12; }
+      .arrow { stroke: #555; stroke-width: 2.2; fill: none; marker-end: url(#arrowhead); }
+      .dash { stroke: #c95a8a; stroke-width: 2.1; fill: none; stroke-dasharray: 8 6; marker-end: url(#arrowheadPink); }
+      .light { stroke: #999; stroke-width: 1.4; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#555"/>
+    </marker>
+    <marker id="arrowheadPink" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#c95a8a"/>
+    </marker>
+  </defs>
+
+  <text x="950" y="50" text-anchor="middle" class="title">FF-Fusion Architecture</text>
+
+  <rect x="40" y="80" width="1820" height="760" class="panel"/>
+  <text x="950" y="115" text-anchor="middle" class="section">Training mode</text>
+
+  <rect x="80" y="150" width="820" height="650" class="panel"/>
+  <text x="490" y="185" text-anchor="middle" class="section">Teacher network</text>
+
+  <rect x="980" y="150" width="840" height="650" class="panel"/>
+  <text x="1400" y="185" text-anchor="middle" class="section">Student network</text>
+
+  <rect x="110" y="220" width="150" height="60" class="input"/>
+  <text x="185" y="257" text-anchor="middle" class="label">Visible image</text>
+
+  <rect x="110" y="300" width="150" height="60" class="input"/>
+  <text x="185" y="337" text-anchor="middle" class="label">Infrared image</text>
+
+  <rect x="300" y="210" width="205" height="180" class="teacher"/>
+  <text x="402" y="240" text-anchor="middle" class="label">Visible encoder</text>
+  <text x="402" y="264" text-anchor="middle" class="small">ResNeXt101 backbone</text>
+  <text x="402" y="295" text-anchor="middle" class="small">L0: 64</text>
+  <text x="402" y="320" text-anchor="middle" class="small">L1: 256</text>
+  <text x="402" y="345" text-anchor="middle" class="small">L2: 512</text>
+  <text x="402" y="370" text-anchor="middle" class="small">L3: 1024</text>
+  <text x="402" y="395" text-anchor="middle" class="small">L4: 2048</text>
+
+  <rect x="300" y="430" width="205" height="180" class="teacher"/>
+  <text x="402" y="460" text-anchor="middle" class="label">Infrared encoder</text>
+  <text x="402" y="484" text-anchor="middle" class="small">ResNeXt101 backbone</text>
+  <text x="402" y="515" text-anchor="middle" class="small">L0: 64</text>
+  <text x="402" y="540" text-anchor="middle" class="small">L1: 256</text>
+  <text x="402" y="565" text-anchor="middle" class="small">L2: 512</text>
+  <text x="402" y="590" text-anchor="middle" class="small">L3: 1024</text>
+  <text x="402" y="615" text-anchor="middle" class="small">L4: 2048</text>
+
+  <rect x="560" y="260" width="155" height="90" class="teacher"/>
+  <text x="637" y="290" text-anchor="middle" class="label">DWT-Fusion</text>
+  <text x="637" y="316" text-anchor="middle" class="small">Shallow fusion</text>
+  <text x="637" y="340" text-anchor="middle" class="small">L0 and L1</text>
+
+  <rect x="560" y="470" width="155" height="110" class="teacher"/>
+  <text x="637" y="500" text-anchor="middle" class="label">CMF module</text>
+  <text x="637" y="526" text-anchor="middle" class="small">Deep fusion</text>
+  <text x="637" y="550" text-anchor="middle" class="small">L2, L3, L4</text>
+  <text x="637" y="572" text-anchor="middle" class="tiny">concat + 1x1 conv</text>
+
+  <rect x="760" y="300" width="110" height="260" class="teacher"/>
+  <text x="815" y="332" text-anchor="middle" class="label">Teacher</text>
+  <text x="815" y="356" text-anchor="middle" class="label">decoder</text>
+  <text x="815" y="384" text-anchor="middle" class="small">reduce + upsample</text>
+  <text x="815" y="408" text-anchor="middle" class="small">ConvBlock head</text>
+  <text x="815" y="446" text-anchor="middle" class="small">d4</text>
+  <text x="815" y="470" text-anchor="middle" class="small">d3</text>
+  <text x="815" y="494" text-anchor="middle" class="small">d2</text>
+  <text x="815" y="518" text-anchor="middle" class="small">d1</text>
+
+  <rect x="760" y="610" width="110" height="70" class="teacher"/>
+  <text x="815" y="640" text-anchor="middle" class="label">Teacher output</text>
+  <text x="815" y="664" text-anchor="middle" class="small">I^T</text>
+
+  <line x1="260" y1="250" x2="300" y2="250" class="arrow"/>
+  <line x1="260" y1="330" x2="300" y2="520" class="arrow"/>
+  <line x1="505" y1="300" x2="560" y2="300" class="arrow"/>
+  <line x1="505" y1="520" x2="560" y2="525" class="arrow"/>
+  <line x1="715" y1="305" x2="760" y2="360" class="arrow"/>
+  <line x1="715" y1="525" x2="760" y2="500" class="arrow"/>
+  <line x1="815" y1="560" x2="815" y2="610" class="arrow"/>
+  <text x="292" y="205" class="tiny">shared backbone weights</text>
+
+  <rect x="1010" y="240" width="170" height="70" class="input"/>
+  <text x="1095" y="270" text-anchor="middle" class="label">Visible image</text>
+  <text x="1095" y="292" text-anchor="middle" class="label">+ Infrared image</text>
+
+  <rect x="1215" y="230" width="150" height="90" class="student"/>
+  <text x="1290" y="260" text-anchor="middle" class="label">Concat</text>
+  <text x="1290" y="286" text-anchor="middle" class="small">2-channel input</text>
+
+  <rect x="1215" y="360" width="200" height="190" class="student"/>
+  <text x="1315" y="390" text-anchor="middle" class="label">DBB encoder</text>
+  <text x="1315" y="418" text-anchor="middle" class="small">Stage 0: 2 -> 8</text>
+  <text x="1315" y="444" text-anchor="middle" class="small">Stage 1: 8 -> 16</text>
+  <text x="1315" y="470" text-anchor="middle" class="small">Stage 2: 16 -> 32, stride 2</text>
+  <text x="1315" y="496" text-anchor="middle" class="small">Stage 3: 32 -> 64, stride 2</text>
+  <text x="1315" y="530" text-anchor="middle" class="tiny">Training: multi-branch DBB</text>
+
+  <rect x="1455" y="330" width="220" height="250" class="student"/>
+  <text x="1565" y="360" text-anchor="middle" class="label">DBB decoder head</text>
+  <text x="1565" y="388" text-anchor="middle" class="small">d4: 64 -> 64</text>
+  <text x="1565" y="414" text-anchor="middle" class="small">Up3: 64 -> 64</text>
+  <text x="1565" y="440" text-anchor="middle" class="small">d3: 96 -> 32</text>
+  <text x="1565" y="466" text-anchor="middle" class="small">Up2: 32 -> 16</text>
+  <text x="1565" y="492" text-anchor="middle" class="small">d2: 32 -> 16</text>
+  <text x="1565" y="518" text-anchor="middle" class="small">Up1: 16 -> 8</text>
+  <text x="1565" y="544" text-anchor="middle" class="small">d1: 16 -> 8</text>
+
+  <rect x="1710" y="405" width="80" height="90" class="student"/>
+  <text x="1750" y="438" text-anchor="middle" class="label">1x1</text>
+  <text x="1750" y="462" text-anchor="middle" class="label">conv</text>
+
+  <rect x="1710" y="530" width="80" height="70" class="student"/>
+  <text x="1750" y="560" text-anchor="middle" class="label">Output</text>
+  <text x="1750" y="584" text-anchor="middle" class="small">I^S</text>
+
+  <line x1="1180" y1="275" x2="1215" y2="275" class="arrow"/>
+  <line x1="1290" y1="320" x2="1315" y2="360" class="arrow"/>
+  <line x1="1415" y1="455" x2="1455" y2="455" class="arrow"/>
+  <line x1="1675" y1="450" x2="1710" y2="450" class="arrow"/>
+  <line x1="1750" y1="495" x2="1750" y2="530" class="arrow"/>
+
+  <rect x="1080" y="610" width="180" height="110" class="distill"/>
+  <text x="1170" y="640" text-anchor="middle" class="label">Feature KD</text>
+  <text x="1170" y="666" text-anchor="middle" class="small">d4^T -> d4^S</text>
+  <text x="1170" y="688" text-anchor="middle" class="small">d3^T -> d3^S</text>
+  <text x="1170" y="710" text-anchor="middle" class="small">d2^T -> d2^S</text>
+
+  <rect x="1300" y="610" width="180" height="110" class="distill"/>
+  <text x="1390" y="640" text-anchor="middle" class="label">Feature KD</text>
+  <text x="1390" y="666" text-anchor="middle" class="small">d1^T -> d1^S</text>
+  <text x="1390" y="688" text-anchor="middle" class="small">L2 loss</text>
+  <text x="1390" y="710" text-anchor="middle" class="small">multi-scale guidance</text>
+
+  <rect x="1520" y="630" width="180" height="90" class="distill"/>
+  <text x="1610" y="660" text-anchor="middle" class="label">Output KD</text>
+  <text x="1610" y="686" text-anchor="middle" class="small">I^T -> I^S</text>
+  <text x="1610" y="708" text-anchor="middle" class="small">L1 loss</text>
+
+  <path d="M815 560 C815 625, 1010 625, 1080 625" class="dash"/>
+  <path d="M815 575 C815 675, 1230 675, 1300 675" class="dash"/>
+  <path d="M815 645 C815 665, 1460 665, 1520 665" class="dash"/>
+  <path d="M1260 665 C1320 665, 1390 640, 1455 470" class="dash"/>
+  <path d="M1480 675 C1560 675, 1565 610, 1565 580" class="dash"/>
+  <path d="M1700 675 C1760 675, 1750 620, 1750 600" class="dash"/>
+
+  <rect x="340" y="860" width="1220" height="160" class="deploy"/>
+  <text x="950" y="898" text-anchor="middle" class="section">Inference / edge deployment</text>
+
+  <rect x="390" y="930" width="130" height="55" class="input"/>
+  <text x="455" y="964" text-anchor="middle" class="label">Visible image</text>
+
+  <rect x="560" y="930" width="130" height="55" class="input"/>
+  <text x="625" y="964" text-anchor="middle" class="label">Infrared image</text>
+
+  <rect x="735" y="920" width="150" height="70" class="deploy"/>
+  <text x="810" y="950" text-anchor="middle" class="label">Concat</text>
+  <text x="810" y="974" text-anchor="middle" class="small">2-channel input</text>
+
+  <rect x="940" y="900" width="330" height="110" class="deploy"/>
+  <text x="1105" y="932" text-anchor="middle" class="label">Re-parameterized student network</text>
+  <text x="1105" y="958" text-anchor="middle" class="small">Only the compact student is retained</text>
+  <text x="1105" y="982" text-anchor="middle" class="small">DBB branches are merged into equivalent single convolutions</text>
+
+  <rect x="1330" y="930" width="130" height="55" class="deploy"/>
+  <text x="1395" y="964" text-anchor="middle" class="label">Fused image</text>
+
+  <line x1="520" y1="958" x2="560" y2="958" class="arrow"/>
+  <line x1="690" y1="958" x2="735" y2="958" class="arrow"/>
+  <line x1="885" y1="958" x2="940" y2="958" class="arrow"/>
+  <line x1="1270" y1="958" x2="1330" y2="958" class="arrow"/>
+
+  <rect x="80" y="860" width="220" height="160" class="note"/>
+  <text x="190" y="895" text-anchor="middle" class="label">Notes</text>
+  <text x="190" y="924" text-anchor="middle" class="small">CMF = Cross-Modal Convolution Fusion</text>
+  <text x="190" y="948" text-anchor="middle" class="small">deep features are concatenated</text>
+  <text x="190" y="970" text-anchor="middle" class="small">and projected by 1x1 conv</text>
+  <text x="190" y="996" text-anchor="middle" class="small">DBB = Diverse Branch Block</text>
+
+  <rect x="1590" y="860" width="250" height="160" class="note"/>
+  <text x="1715" y="895" text-anchor="middle" class="label">Drawing assumptions</text>
+  <text x="1715" y="924" text-anchor="middle" class="small">Teacher: 5-level fusion branch</text>
+  <text x="1715" y="948" text-anchor="middle" class="small">Student: compact 4-stage deployable branch</text>
+  <text x="1715" y="972" text-anchor="middle" class="small">Feature KD is drawn on d4, d3, d2, d1</text>
+  <text x="1715" y="996" text-anchor="middle" class="small">for manuscript-ready presentation</text>
+</svg>

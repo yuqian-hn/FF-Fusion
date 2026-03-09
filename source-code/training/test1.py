@@ -1,0 +1,69 @@
+"""测试融合网络"""
+import argparse
+import os
+import random
+
+import numpy as np
+import torch
+from torch.utils.data import DataLoader
+from torchvision import transforms
+from tqdm import tqdm
+
+from dataloder_test import MSRS_data
+from models.common import clamp, YCrCb2RGB
+from models.final_model import Fusion_Model_student
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+
+
+
+
+
+if __name__ == '__main__':
+
+    num_works = 1
+    fusion_result_path = 'fusion_v1'
+
+    if not os.path.exists(fusion_result_path):
+        os.makedirs(fusion_result_path)
+
+
+    test_dataset = MSRS_data()
+    test_loader = DataLoader(
+        test_dataset, batch_size=1, shuffle=False,
+        num_workers=num_works, pin_memory=True)
+
+    if not os.path.exists(fusion_result_path):
+        os.makedirs(fusion_result_path)
+
+    #######加载模型
+    model =(Fusion_Model_student()).cuda()
+
+    model.load_state_dict(torch.load('runs/student.pth'))
+
+    model.eval()
+
+
+    ##########加载数据
+    test_tqdm = tqdm(test_loader, total=len(test_loader))
+    with torch.no_grad():
+        for vis_image, vis_y_image, vis_cb_image, vis_cr_image, inf_image, name in test_tqdm:
+            vis_y_image = vis_y_image.cuda()
+            cb = vis_cb_image.cuda()
+            cr = vis_cr_image.cuda()
+            inf_image = inf_image.cuda()
+
+            #####模型推理
+            #print(vis_y_image.shape, inf_image.shape)
+
+            f,_,_,_,_,_ = model(vis_y_image, inf_image)
+
+
+            ###########转为rgb
+            fused = clamp(f)
+            if torch.equal(vis_y_image, cb):
+                rgb_fused_image = fused[0]
+            else:
+                rgb_fused_image = YCrCb2RGB(fused[0], cb[0], cr[0])
+            rgb_fused_image = transforms.ToPILImage()(rgb_fused_image)
+            rgb_fused_image.save(f'{fusion_result_path}/{name[0]}')
