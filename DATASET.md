@@ -51,19 +51,6 @@ Important reproducibility note:
 - The current fusion training scripts in the workspace do not yet expose an explicit train-validation-test split.
 - If the public repository reports a split-based protocol for downstream tasks, publish the exact split file lists together with the annotations.
 
-## Recommended Public Dataset Package
-
-When the dataset is released, the package should ideally include:
-
-- visible images
-- infrared images
-- polygon annotations
-- category list
-- split files
-- dataset license
-- Zenodo DOI
-- a short usage guide
-
-## Suggested Dataset Description
+## Dataset Description
 
 `TF-1770 is a forest-fire-oriented visible-infrared dataset containing 1,770 synchronized image pairs collected from firefighter and UAV viewpoints. Each pair is spatially aligned by ECC-based registration, cropped to the overlapping field of view, and resized to 640 x 480 for multimodal fusion and deployment-oriented evaluation.`
