@@ -12,7 +12,7 @@ FF-Fusion is a scenario-oriented visible-infrared image fusion framework for for
 - structural re-parameterization for deployment, and
 - edge-device benchmarking on a D-Robotics RDK X5 platform.
 
-![FF-Fusion architecture](assets/FF-Fusion-architecture.svg)
+![FF-Fusion architecture](assets/FF-Fusion-network.jpg)
 
 ## Verified Project Facts
 
